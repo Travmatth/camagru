@@ -6,7 +6,18 @@
   "author": "Travis Matthews",
   "license": "MIT",
   "scripts": {
-	  "dev": "webpack --mode development",
-	  "build": "webpack --mode production"
+    "test": "webpack",
+    "dev": "webpack --mode development --config build/webpack.config.js",
+    "build": "webpack --mode production --config build/webpack.config.js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^4.38.0",
+    "webpack-cli": "^3.3.6"
+  },
+  "dependencies": {
+    "@babel/core": "^7.5.5"
   }
 }
