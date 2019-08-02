@@ -1,4 +1,13 @@
+'use strict'
+
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const build = (...dirs) => path.resolve(process.cwd(), ...dirs)
+
 module.exports = {
+	entry: {
+		main: './src/landing.js'
+	},
 	module: {
 		// Define modifications to occur when module is created
 		rules: [
@@ -11,5 +20,12 @@ module.exports = {
 				}
 			}
 		]
-	}
+	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			template: build('assets', 'index.html'),
+			title: 'index',
+			filename: 'index.html'
+		})
+	]
 }
