@@ -6,7 +6,7 @@
   "author": "Travis Matthews",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server -d --config build/webpack.config.js --host 0.0.0.0 --hot --inline --content-base dist/ --color --bail",
+    "start": "NODE_ENV=development webpack-dev-server -d --config build/webpack.config.js --hot --inline --content-base dist/ --color --bail",
     "dev": "webpack --mode development --config build/webpack.config.js",
     "build": "webpack --mode production --config build/webpack.config.js"
   },
