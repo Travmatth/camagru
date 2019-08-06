@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  # specification for the client docker container
+  client:
+    build:
+      context: ../client
+      dockerfile: ../docker/client.Dockerfile
+    environment:
+      NODE_ENV: 'dev'
+      BABEL_ENV: 'dev'
+    ports:
+      - "8080:8080"
+    volumes:
+      - "client-volume:/app:rw"
+    command: "yarn start"
+    container_name: client-container
+
+volumes:
+  client-volume:
+    driver_opts:
+      type: none
+      device: /client
+      o: bind

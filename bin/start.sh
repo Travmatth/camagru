@@ -1,3 +1,2 @@
 #!/bin/sh
-
-docker-compose -f compose.development.yaml up -d
+docker-compose -f docker/compose.development.yaml up -d

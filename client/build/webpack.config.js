@@ -9,9 +9,7 @@ module.exports = {
 		main: './src/landing.js'
 	},
 	module: {
-		// Define modifications to occur when module is created
 		rules: [
-			// Convert es2016 syntax -> es2015 syntax
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
@@ -29,11 +27,12 @@ module.exports = {
 		})
 	],
 	devServer: {
-		port: 8080, // use any port suitable for your configuration
-		host: '0.0.0.0', // to accept connections from outside container
+		hot: true,
+		port: 8080,
+		host: '0.0.0.0',
 		watchOptions: {
-			aggregateTimeout: 500, // delay before reloading
-			poll: 1000 // enable polling since fsevents are not supported in docker
+			// enable polling - fsevents are not supported in docker
+			poll: true
 		}
 	  }
 }
