@@ -12,6 +12,10 @@ module.exports = {
 			build('src', 'landing-styles')
 		],
 	},
+	output: {
+		publicPath: '/',
+		path: build('dist'),
+	},
 	resolve: {
 		extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss']
 	},
@@ -78,6 +82,7 @@ module.exports = {
 		watchOptions: {
 			// enable polling - fsevents are not supported in docker
 			poll: true
-		}
+		},
+		historyApiFallback: true,
 	  }
 }
