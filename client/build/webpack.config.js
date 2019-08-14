@@ -8,22 +8,30 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
 	entry: {
 		index: [
-			build('src', 'landing'),
+			build('src', 'index'),
 			build('src', 'landing-styles')
 		],
 	},
 	resolve: {
-		extensions: ['.js', '.jsx', '.scss']
+		extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss']
 	},
+	devtool: "source-map",
 	module: {
 		rules: [
+			{
+				test: /\.ts(x?)$/,
+				exclude: /node_modules/,
+				use: {
+					loader: "ts-loader"
+				}
+			},
 			{
 				test: /\.ejs$/,
 				exclude: /node_modules/,
 				use: 'ejs-loader'
 			},
 			{
-				test: /\.(js|jsx)$/,
+				test: /\.js(x?)$/,
 				exclude: /node_modules/,
 				use: {
 					loader: "babel-loader"
@@ -44,7 +52,13 @@ module.exports = {
 			{
 				test: /\.(woff|woff2|ttf|otf|eot\?#.+|svg#.+)$/,
 				loader: "file?name=[path][name].[ext]"
-			}
+			},
+            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+            {
+                enforce: "pre",
+                test: /\.js$/,
+                loader: "source-map-loader"
+            },
 		]
 	},
 	plugins: [
