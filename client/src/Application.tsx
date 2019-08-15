@@ -1,32 +1,27 @@
 import * as React from 'react';
-import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
-import * as UIkit from 'uikit';
-import * as Icons from 'uikit/dist/js/uikit-icons';
+import { BrowserRouter, Route, Link, Switch, RouteComponentProps } from "react-router-dom";
 import ApiManager from './ApiManager';
 import { Home, NavBar, NotFound, Studio } from './Components'
+import { RouteWithProps } from './Utils';
 
-const InitUIKit = () => {
-    UIkit.use(Icons)
-}
-
-type CamagruProps = {
+type ApiProps = {
 	api: ApiManager
 }
 
-class Application extends React.Component<CamagruProps , any> {
+class Application extends React.Component<ApiProps , any> {
 	constructor(props: any) {
 		super(props);
 	}
 
 	render() {
-		this.props.api.login();
+		const { props } = this
 		return (
 			<BrowserRouter>
-				<NavBar/>
+				<NavBar {...props}/>
 				<Switch>
-					<Route exact path="/" component={Home}/>
-					<Route path="/studio" component={Studio}/>
-					<Route component={NotFound}/>
+					<RouteWithProps exact path="/" component={Home} withProps={props}/>
+					<RouteWithProps path="/studio" component={Studio} withProps={props}/>
+					<RouteWithProps component={NotFound} withProps={props}/>
 				</Switch>
 			</BrowserRouter>
 		)
@@ -34,4 +29,4 @@ class Application extends React.Component<CamagruProps , any> {
 }
 
 export default Application
-export {InitUIKit}
+export { ApiProps }

@@ -1,6 +1,13 @@
 class ApiManager {
+	authenticated: boolean = false;
 	login() {
-		console.log("login")
+		this.authenticated = true;
+	}
+	logout() {
+		this.authenticated = false;
+	}
+	isLoggedIn() {
+		return this.authenticated
 	}
 }
 
