@@ -138,39 +138,39 @@ interface Icons {
 
 declare namespace UIkit {
   const use: fn;
-  // const lightbox: fn;
-  // const autocomplete: fn;
+  const lightbox: fn;
+  const autocomplete: fn;
   const alert: fn;
-  // const datepicker: fn;
+  const datepicker: fn;
   const drop: fn;
-  // const dropdown: fn;
+  const dropdown: fn;
   const countdown: fn;
   const cover: fn;
   const formCustom: fn;
   const icon: fn;
-  // const htmleditor: fn;
+  const htmleditor: fn;
   const margin: fn;
-  // const modal: fn;
+  const modal: fn;
   const nav: fn;
   const navbar: fn;
-  // const slider: fn;
-  // const slideset: fn;
-  // const slideshow: fn;
-  // const parallax: fn;
-  // const accordion: fn;
+  const slider: fn;
+  const slideset: fn;
+  const slideshow: fn;
+  const parallax: fn;
+  const accordion: fn;
   const notification: fn;
-  // const nestable: fn;
-  // const offcanvas: fn;
+  const nestable: fn;
+  const offcanvas: fn;
   const scroll: fn;
   const scrollspy: fn;
-  // const search: fn;
-  // const sortable: fn;
-  // const sticky: fn;
+  const search: fn;
+  const sortable: fn;
+  const sticky: fn;
   const switcher: fn;
   const tab: fn;
-  // const timepicker: fn;
+  const timepicker: fn;
   const toggle: fn;
-  // const tooltip: fn;
+  const tooltip: fn;
   const upload: fn;
 }
 

@@ -31,8 +31,8 @@ const LoggedOut = (props: ApiProps) => (
 const NavBar = (props: ApiProps) => (
 	<nav className="uk-navbar-container">
 		{ props.api.isLoggedIn()
-		? <LoggedIn {...props}/>
-		: <LoggedOut {...props}/>
+			? <LoggedIn {...props}/>
+			: <LoggedOut {...props}/>
 		}
 	</nav>
 );

@@ -9,7 +9,7 @@ type ApiProps = {
 }
 
 class Application extends React.Component<ApiProps , any> {
-	constructor(props: any) {
+	constructor(props: ApiProps) {
 		super(props);
 	}
 
@@ -19,9 +19,20 @@ class Application extends React.Component<ApiProps , any> {
 			<BrowserRouter>
 				<NavBar {...props}/>
 				<Switch>
-					<RouteWithProps exact path="/" component={Home} withProps={props}/>
-					<RouteWithProps path="/studio" component={Studio} withProps={props}/>
-					<RouteWithProps component={NotFound} withProps={props}/>
+					<RouteWithProps exact
+						path="/"
+						component={Home}
+						withProps={props}
+					/>
+					<RouteWithProps
+						path="/studio"
+						component={Studio}
+						withProps={props}
+					/>
+					<RouteWithProps
+						component={NotFound}
+						withProps={props}
+					/>
 				</Switch>
 			</BrowserRouter>
 		)

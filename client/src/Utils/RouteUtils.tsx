@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { Route } from 'react-router-dom';
 
+/*
+Util Components for Managing Authenticated Routes & Passing Props to Components:
+https://medium.com/@robjtede/the-real-routewithprops-react-component-in-typescript-defacde01991
+https://stackoverflow.com/questions/47476186/when-user-is-not-logged-in-redirect-to-login-reactjs
+*/
+
 type RouteProps = {
 	component: any
 	withProps?: any
