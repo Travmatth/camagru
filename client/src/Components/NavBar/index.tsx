@@ -3,7 +3,7 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { ApiProps } from "../../Application";
 
 const LoggedIn = (props: ApiProps) => (
-	<div className="uk-navbar">
+	<React.Fragment>
 		<div className="uk-navbar-right">
 			<h1>Camagru</h1>
 		</div>
@@ -17,23 +17,23 @@ const LoggedIn = (props: ApiProps) => (
 				</li>
 			</ul>
 		</div>
-	</div>
+	</React.Fragment>
 )
 
 const LoggedOut = (props: ApiProps) => (
-	<div className="uk-navbar">
-		<div className="uk-navbar-center">
-			<h1>Camagru</h1>
-		</div>
+	<div className="uk-navbar-center">
+		<h1>Camagru</h1>
 	</div>
 )
 
 const NavBar = (props: ApiProps) => (
 	<nav className="uk-navbar-container">
-		{ props.api.isLoggedIn()
-			? <LoggedIn {...props}/>
-			: <LoggedOut {...props}/>
-		}
+		<div className="uk-navbar">
+			{ props.api.isLoggedIn()
+				? <LoggedIn {...props}/>
+				: <LoggedOut {...props}/>
+			}
+		</div>
 	</nav>
 );
 
