@@ -1,79 +1,78 @@
 import * as React from 'react';
 import { RouteComponentProps } from "react-router-dom";
-import { ApiProps } from '../../Application';
-import SignupForm from './Signup';
-import LoginForm from './Login';
+import { AuthProps, AuthConsumer } from '../../Application';
+import SignupForm from './SignupForm';
+import LoginForm from './LoginForm';
+import Toggle from './Toggle';
 
-const Buttons = () => (
-	<div className="uk-child-width-1-2" data-uk-grid>
-		<div className="">
-			<button className="uk-button">Sign Up</button>
-		</div>
-		<div className="">
-			<button className="uk-button">Log In</button>
-		</div>
-	</div>
-)
+type ToggleProps = {
+	active: string,
+	setActive: React.Dispatch<React.SetStateAction<string>>,
+}
 
-type ToggleState = {
+type LoginProps = {
 	active: string,
 	username: string,
-	email: string,
+	setUsername: React.Dispatch<React.SetStateAction<string>>,
 	password: string
+	setPassword: React.Dispatch<React.SetStateAction<string>>,
+}
+
+type SignupProps = {
+	email: string,
+	setEmail: React.Dispatch<React.SetStateAction<string>>,
 	passwordConfirmation: string
+	setPasswordConfirmation: React.Dispatch<React.SetStateAction<string>>,
 }
 
-type FormProps = {
-	state: ToggleState,
-	action: () => void,
-	onChange: (event: React.SyntheticEvent<HTMLInputElement>) => void
-}
+const createInputProps = (
+	name: string,
+	value: string,
+	onChange: React.ChangeEventHandler<HTMLInputElement>,
+) => ({
+	name: name,
+	type: 'text',
+	placeholder: name,
+	value: value,
+	onChange: onChange,
+	className: 'uk-input',
+})
 
-class Home extends React.Component<ApiProps & RouteComponentProps, ToggleState> {
-	public readonly state: ToggleState = {
-		active: "signup",
-		username: "",
-		email: "",
-		password: "",
-		passwordConfirmation: ""
+const HomeWithContext = (props: AuthProps & RouteComponentProps) => {
+	const [active, setActive] = React.useState("signup"); 
+	const [username, setUsername] = React.useState("signup");
+	const [email, setEmail] = React.useState("signup");
+	const [password, setPassword] = React.useState("signup");
+	const [passwordConfirmation, setPasswordConfirmation] = React.useState("signup");
+	const loginProps = {
+		active,
+		username,
+		setUsername,
+		password,
+		setPassword,
 	}
-
-	toggleForm(form: string) {
-		return () => {
-			if (this.state.active != form) {
-				this.setState({active: form})
-			}
-		}
+	const signupProps = {
+		email,
+		setEmail,
+		passwordConfirmation,
+		setPasswordConfirmation,
 	}
-
-	onChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
-		const { name, value } = event.currentTarget;
-		this.setState({ [name]: value } as any)
-	}
-
-	render() {
-		const { signup, login } = this.props.api
-		const { state } = this
-
-		return (
-			<div className="uk-container uk-background-primary uk-text-center">
-				<div className="uk-container uk-background-primary uk-width-1-1@s uk-width-1-3@m uk-width-1-4@l">
-					<Buttons/>
-					<SignupForm
-						action={signup}
-						state={state}
-						onChange={this.onChange}
-					/>
-					<LoginForm
-						action={login}
-						state={state}
-						onChange={this.onChange}
-					/>
-				</div>
+	return (
+		<div className="uk-container uk-background-primary uk-text-center">
+			<div className="uk-container uk-background-primary uk-width-1-1@s uk-width-1-3@m uk-width-1-4@l">
+				<Toggle active={active} setActive={setActive}/>
+				<SignupForm {...props} {...loginProps} {...signupProps}/>
+				<LoginForm {...props} {...loginProps}/>
 			</div>
-		);
-	}
+		</div>
+	);
 }
+
+const Home = (routeProps: RouteComponentProps) => (
+	<AuthConsumer>
+		{ (props) =>  <HomeWithContext {...routeProps} {...props}/> }
+	</AuthConsumer>
+)
 
 export default Home
-export { FormProps }
+export { ToggleProps, LoginProps, SignupProps, createInputProps }

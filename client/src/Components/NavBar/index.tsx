@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Link, RouteComponentProps } from "react-router-dom";
-import { ApiProps } from "../../Application";
+import { Link } from "react-router-dom";
+import { AuthProps, AuthConsumer } from '../../Application';
 
-const LoggedIn = (props: ApiProps) => (
+const LoggedIn = (props: AuthProps) => (
 	<React.Fragment>
 		<div className="uk-navbar-right">
 			<h1>Camagru</h1>
@@ -20,21 +20,29 @@ const LoggedIn = (props: ApiProps) => (
 	</React.Fragment>
 )
 
-const LoggedOut = (props: ApiProps) => (
+const LoggedOut = () => (
 	<div className="uk-navbar-center">
 		<h1>Camagru</h1>
 	</div>
 )
 
-const NavBar = (props: ApiProps) => (
-	<nav className="uk-navbar-container">
-		<div className="uk-navbar">
-			{ props.api.isLoggedIn()
-				? <LoggedIn {...props}/>
-				: <LoggedOut {...props}/>
-			}
-		</div>
-	</nav>
-);
+const NavBarWithContext = (props: AuthProps) => {
+	return (
+		<nav className="uk-navbar-container">
+			<div className="uk-navbar">
+				{ props.authenticated
+					? <LoggedIn {...props}/>
+					: <LoggedOut/>
+				}
+			</div>
+		</nav>
+	);
+}
+
+const NavBar = () => (
+	<AuthConsumer>
+		{ (props) =>  <NavBarWithContext {...props}/> }
+	</AuthConsumer>
+)
 
 export default NavBar

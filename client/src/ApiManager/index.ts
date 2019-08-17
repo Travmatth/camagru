@@ -1,22 +1,14 @@
 class ApiManager {
-	authenticated: boolean = false;
-
-	signup() {
-		this.authenticated = true;
+	async signup(email: string, username: string, password: string): Promise<boolean> {
+		return await Promise.resolve(true)
 	}
 
-	login() {
-		this.authenticated = true;
-		console.log("login")
+	async login(username: string, password: string): Promise<boolean> {
+		return await Promise.resolve(true)
 	}
 
-	logout() {
-		this.authenticated = false;
-		console.log("logout")
-	}
-
-	isLoggedIn() {
-		return this.authenticated
+	async logout(): Promise<boolean> {
+		return await Promise.resolve(true)
 	}
 }
 

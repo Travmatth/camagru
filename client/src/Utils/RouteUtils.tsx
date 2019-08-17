@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 
 /*
 Util Components for Managing Authenticated Routes & Passing Props to Components:
@@ -26,7 +26,7 @@ const RouteWithProps = ({component: Component, withProps = {}, ...props}: RouteP
 const AuthRoute = ({component: Component, isLoggedIn, ...rest}: AuthRouteProps) => (
 	isLoggedIn()
 	? <Route {...rest} render={props => <Component {...props} {...rest}/>}/>
-	: null
+	: <Redirect to="/"/>
 )
 
 const AuthRouteWithProps = ({component: Component
@@ -35,10 +35,11 @@ const AuthRouteWithProps = ({component: Component
 							,  ...rest}: RouteProps & AuthRouteProps) => (
 	isLoggedIn()
 	? <RouteWithProps {...rest} component={Component} withProps={withProps}/>
-	: null
+	: <Redirect to="/"/>
 )
 
 export {
+	ContextRoute,
 	RouteWithProps,
 	AuthRoute,
 	AuthRouteWithProps
