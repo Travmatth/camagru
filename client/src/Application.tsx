@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Link, Switch, RouteComponentProps } from "react-router-dom";
 import ApiManager from './ApiManager';
-import { Home, NavBar, NotFound, Studio } from './Components'
+import { Home, NavBar, NotFound, Studio, Footer } from './Components'
+import { AuthRoute } from './Utils'
 
 type AuthProps = {
 	authenticated: boolean
-	signup: (email: string, username: string, password: string) => Promise<void>
-	login: (username: string, password: string) => Promise<void>
-	logout: (username: string, password: string) => Promise<void>
+	setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
+	api: ApiManager
 }
 
 const AuthContext = React.createContext<AuthProps>(undefined as any as AuthProps)
@@ -15,29 +15,28 @@ const AuthProvider = AuthContext.Provider
 const AuthConsumer = AuthContext.Consumer
 
 const Application = () => {
-	const [authenticated, setAuthenticated] = React.useState(false); 
 	const api = new ApiManager();
-	const signup = async (email: string, username: string, password: string): Promise<void> => { setAuthenticated(await api.signup(email, username, password)) }
-	const login = async (username: string, password: string): Promise<void> => { setAuthenticated(await api.login(username, password)) }
-	const logout = async (username: string, password: string): Promise<void> => { setAuthenticated(await api.logout()) }
+	const [authenticated, setAuthenticated] = React.useState(false); 
 
 	const authContext = {
 		authenticated,
-		signup,
-		login,
-		logout
+		setAuthenticated,
+		api,
 	};
 
 
 	return (
-		<BrowserRouter>
-			<NavBar/>
-			<Switch>
-				<Route exact path="/" component={Home}/>
-				<Route path="/studio" component={Studio}/>
-				<Route component={NotFound}/>
-			</Switch>
-		</BrowserRouter>
+		<AuthProvider value={authContext}>
+			<BrowserRouter>
+				<NavBar/>
+				<Switch>
+					<Route exact path='/' component={Home}/>
+					<AuthRoute authenticated={authenticated} path='/studio' component={Studio}/>
+					<Route component={NotFound}/>
+				</Switch>
+				<Footer/>
+			</BrowserRouter>
+		</AuthProvider>
 	);
 }
 

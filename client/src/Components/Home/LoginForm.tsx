@@ -4,7 +4,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { AuthProps } from '../../Application';
 
 const LoginForm = ({
-		login,
+		api,
 		active,
 		username,
 		setUsername,
@@ -15,13 +15,15 @@ const LoginForm = ({
 		{ setUsername(e.currentTarget.value) }
 	const setPasswordOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>
 		{ setPassword(e.currentTarget.value) }
-	const onSubmit = () => { login(username, password) }
+	const onSubmit = () => {
+		console.log("boolean: ", api.login(username, password))
+	}
 
 	return (
-		<form className='uk-form-stacked' onSubmit={onSubmit} hidden={active != "signup"}>
-			<input {...createInputProps('username', username, setUsernameOnChange)}/>
-			<input {...createInputProps('password',  password, setPasswordOnChange)}/>
-			<input type="submit" value="Submit"/>
+		<form className='uk-form-stacked' onSubmit={onSubmit} hidden={active != "login"}>
+			<input {...createInputProps('username', 'text', username, setUsernameOnChange)}/>
+			<input {...createInputProps('password',  'password', password, setPasswordOnChange)}/>
+			<input className='uk-button uk-button-default uk-margin-top uk-margin-bottom uk-background-muted' type='submit' value='Submit'/>
 		</form>
 	);
 }

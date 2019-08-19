@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { ToggleProps } from './index';
 
-const Toggle = (props: ToggleProps) => (
-	<div className="uk-child-width-1-2" data-uk-grid>
-		<div className="">
-			<button className="uk-button">Sign Up</button>
+const Toggle = ({ setSignup, setLogin }: ToggleProps) => (
+	<div className='uk-child-width-1-2' data-uk-grid>
+		<div>
+			<button className='uk-button uk-margin-top uk-margin-bottom' onClick={setSignup}>Sign Up</button>
 		</div>
-		<div className="">
-			<button className="uk-button">Log In</button>
+		<div>
+			<button className='uk-button uk-margin-top uk-margin-bottom' onClick={setLogin}>Log In</button>
 		</div>
 	</div>
 )

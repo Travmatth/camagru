@@ -15,7 +15,7 @@ type RouteProps = {
 
 type AuthRouteProps = {
 	component: any
-	isLoggedIn: () => boolean
+	authenticated: boolean
 	[propName: string]: any
 }
 
@@ -23,23 +23,22 @@ const RouteWithProps = ({component: Component, withProps = {}, ...props}: RouteP
 	<Route {...props} render={props => <Component {...props} {...withProps}/>}/>
 )
 
-const AuthRoute = ({component: Component, isLoggedIn, ...rest}: AuthRouteProps) => (
-	isLoggedIn()
+const AuthRoute = ({component: Component, authenticated, ...rest}: AuthRouteProps) => (
+	authenticated
 	? <Route {...rest} render={props => <Component {...props} {...rest}/>}/>
 	: <Redirect to="/"/>
 )
 
 const AuthRouteWithProps = ({component: Component
 							, withProps
-							, isLoggedIn
+							, authenticated
 							,  ...rest}: RouteProps & AuthRouteProps) => (
-	isLoggedIn()
+	authenticated
 	? <RouteWithProps {...rest} component={Component} withProps={withProps}/>
 	: <Redirect to="/"/>
 )
 
 export {
-	ContextRoute,
 	RouteWithProps,
 	AuthRoute,
 	AuthRouteWithProps
