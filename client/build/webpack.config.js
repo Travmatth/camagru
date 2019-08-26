@@ -4,6 +4,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const build = (...dirs) => path.resolve(process.cwd(), ...dirs)
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
 	entry: {
@@ -20,6 +21,8 @@ module.exports = {
 		extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss']
 	},
 	devtool: "source-map",
+    target: 'web',
+    // externals: [nodeExternals({})],
 	module: {
 		rules: [
 			{
