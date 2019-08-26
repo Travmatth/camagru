@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-  # specification for the client docker container
   client:
     build:
       context: ../client
@@ -13,12 +12,12 @@ services:
       - "8080:8080"
     volumes:
       - "client-volume:/app:rw"
-    command: "yarn start"
+    command: "npm run start"
     container_name: client-container
 
 volumes:
   client-volume:
     driver_opts:
       type: none
-      device: /client
+      device: ${CAMAGRU_LOCAL_VOL}
       o: bind

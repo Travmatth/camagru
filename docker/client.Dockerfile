@@ -1,4 +1,4 @@
 FROM node:latest
 
 WORKDIR /app
-CMD yarn build
+CMD npm build
