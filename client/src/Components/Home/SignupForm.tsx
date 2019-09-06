@@ -23,7 +23,7 @@ const SignupForm = ({
 	const modalProps = { api, setAuthenticated, modalRef: React.useRef(null), showModal, setShowModal } 
 	const setOnChange = (set: React.Dispatch<React.SetStateAction<string>>) =>
 		(e: React.ChangeEvent<HTMLInputElement>) => { set(e.currentTarget.value) }
-	const onSubmit = () => async (event: React.FormEvent<HTMLFormElement>) => {
+	const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		event.stopPropagation();
 		if (password !== passwordConfirmation) {
