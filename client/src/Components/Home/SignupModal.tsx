@@ -16,7 +16,7 @@ type ModalBodyProps = {
 
 type ModalProps = {
     api: ApiManager
-	showModal: boolean
+    showModal: boolean
     setShowModal: React.Dispatch<React.SetStateAction<boolean>> 
     modalRef: React.MutableRefObject<any>
     setAuthenticated: React.Dispatch<React.SetStateAction<boolean>> 
