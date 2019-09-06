@@ -58,8 +58,8 @@ const Modal = ({api, setAuthenticated, setShowModal, showModal, modalRef }: Moda
             setAuthenticated(true)
         }
     } 
-	const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-		{ setConfirmation(e.currentTarget.value) }
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+        { setConfirmation(e.currentTarget.value) }
     const inputProps = { value: confirmation, type: 'text', placeholder: 'confirmation code', onChange }
 
     React.useEffect(() => {
@@ -67,6 +67,7 @@ const Modal = ({api, setAuthenticated, setShowModal, showModal, modalRef }: Moda
         showModal ? modal.show() : modal.hide()
         console.log(showModal ? "showing modal" : "hiding modal")
     }, [showModal])
+
     return (
         <div ref={modalRef} data-uk-modal>
             <div className="uk-modal-dialog">

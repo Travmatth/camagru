@@ -8,38 +8,38 @@ https://stackoverflow.com/questions/47476186/when-user-is-not-logged-in-redirect
 */
 
 type RouteProps = {
-	component: any
-	withProps?: any
-	[propName: string]: any
+    component: any
+    withProps?: any
+    [propName: string]: any
 }
 
 type AuthRouteProps = {
-	component: any
-	authenticated: boolean
-	[propName: string]: any
+    component: any
+    authenticated: boolean
+    [propName: string]: any
 }
 
 const RouteWithProps = ({component: Component, withProps = {}, ...props}: RouteProps) => (
-	<Route {...props} render={props => <Component {...props} {...withProps}/>}/>
+    <Route {...props} render={props => <Component {...props} {...withProps}/>}/>
 )
 
 const AuthRoute = ({component: Component, authenticated, ...rest}: AuthRouteProps) => (
-	authenticated
-	? <Route {...rest} render={props => <Component {...props} {...rest}/>}/>
-	: <Redirect to="/"/>
+    authenticated
+    ? <Route {...rest} render={props => <Component {...props} {...rest}/>}/>
+    : <Redirect to="/"/>
 )
 
 const AuthRouteWithProps = ({component: Component
-							, withProps
-							, authenticated
-							,  ...rest}: RouteProps & AuthRouteProps) => (
-	authenticated
-	? <RouteWithProps {...rest} component={Component} withProps={withProps}/>
-	: <Redirect to="/"/>
+                            , withProps
+                            , authenticated
+                            ,  ...rest}: RouteProps & AuthRouteProps) => (
+    authenticated
+    ? <RouteWithProps {...rest} component={Component} withProps={withProps}/>
+    : <Redirect to="/"/>
 )
 
 export {
-	RouteWithProps,
-	AuthRoute,
-	AuthRouteWithProps
+    RouteWithProps,
+    AuthRoute,
+    AuthRouteWithProps
 }
