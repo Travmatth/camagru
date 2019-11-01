@@ -10,14 +10,14 @@ services:
       BABEL_ENV: 'dev'
     ports:
       - "8080:8080"
-    volumes:
-      - "client-volume:/app:rw"
-    command: "npm run start"
+    # volumes:
+    #   - "client-volume:/src/client/node_modules:rw"
+    # command: "npm run start"
     container_name: client-container
 
-volumes:
-  client-volume:
-    driver_opts:
-      type: none
-      device: ${CAMAGRU_LOCAL_VOL}
-      o: bind
+# volumes:
+#   client-volume:
+#     driver_opts:
+#       type: none
+#       device: ${CAMAGRU_LOCAL_VOL}
+#       o: bind
